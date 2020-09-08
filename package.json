@@ -1,0 +1,26 @@
+{
+  "name": "nekomi",
+  "version": "0.0.1",
+  "description": "A discord bot focused on moderation",
+  "main": "build/bot.js",
+  "scripts": {
+    "dev": "nodemon",
+    "build": "tsc"
+  },
+  "author": "Imposed",
+  "license": "MIT",
+  "dependencies": {
+    "discord-akairo": "github:1Computer1/discord-akairo",
+    "discord.js": "github:discordjs/discord.js",
+    "mongodb": "^3.5.6",
+    "pg": "^8.0.3",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.2",
+    "nodemon": "^2.0.3",
+    "path": "^0.12.7",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
+  }
+}
