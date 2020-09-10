@@ -7,7 +7,7 @@ export default class PingCommand extends Command {
             aliases: ['ping'],
             category: 'general',
             description: {
-                content: 'Check the latrency of the bot from the Discord API',
+                content: 'Check the latency of the bot from the Discord API',
                 usage: 'ping'
             },
             ratelimit: 3

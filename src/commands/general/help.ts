@@ -25,7 +25,7 @@ export default class HelpCommand extends Command {
         if(!args.content || args.content === null) return msg.channel.send(this.client.commandHandler.modules.map(c => c.aliases[0]));
 
         if(args.content === commands[0]) {
-            return msg.channel.send(this.client.commandHandler.modules.map(c => c.description));
+            return msg.channel.send(this.client.commandHandler.modules.map(c => c.description.content));
         }
     }
 }
