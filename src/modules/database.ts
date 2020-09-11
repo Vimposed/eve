@@ -33,7 +33,7 @@ export default class Database {
     if (!guild) {
       const obj = {
         id: id,
-        prefix: '??',
+        prefix: '++',
         blacklisted: false,
         settings: {
           logs: {

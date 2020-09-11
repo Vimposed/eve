@@ -7,7 +7,6 @@ export const connectRedis = () => {
   client = new Redis({
     host: redis.host,
     port: 6379,
-    password: redis.password || 'auth'
   });
 }
 
