@@ -1,11 +1,13 @@
+import { Collection } from 'discord.js';
 import { MongoClient, collection } from 'mongodb';
 
 export default class Database {
-  url: string;
-  client: MongoClient;
-  guilds: collection;
-  users: collection;
-  guildusers: collection;
+  private url: string;
+  public client: MongoClient;
+  public guilds: collection;
+  public users: collection;
+  public guildusers: collection;
+  public settings: collection;
   constructor(url: string) {
     this.url = url;
     this.client = new MongoClient(this.url, {
@@ -22,10 +24,48 @@ export default class Database {
     }
 
     await this.client.connect();
-    this.guilds = this.client.db('nesquik').collection('guilds');
-    this.users = this.client.db('nesquik').collection('users');
-    this.guildusers = this.client.db('nesquik').collection('guildusers');
+    this.guilds = this.client.db('eve').collection('guilds');
+    this.users = this.client.db('eve').collection('users');
+    this.guildusers = this.client.db('eve').collection('guildusers');
+    this.settings = this.client.db('eve').collection('settings');
     return console.log(`Connected to MongoDB`);
+  }
+
+  async addSettings(id: string) {
+    const settings = await this.settings.findOne({ id: id });
+    if(!settings) {
+      const obj = {
+        id: id,
+        raid: {
+          enabled: false,
+          channel: '',
+          period: '',
+          flagged_role: '',
+          flagged_channel: '',
+          verify: false,
+          newAccount: false
+        },
+        automod: {
+          copypastaStrikes: 0,
+          dehoist: false,
+          dupeDeleteThresh: 0,
+          dupeStrikeThresh: 0,
+          dupeStrikes: 0,
+          mentionStrikes: 0,
+          maxMentions: 4,
+          resolveLinks: false
+        },
+        guild: {
+          autorole: false,
+          autoroles: [],
+          joinLogActive: false,
+          joinChannel: '',
+          joinMessage: '',
+          joinLogType: 'message'
+        }
+      }
+      return this.settings.insertOne(obj);
+    }
   }
 
   async addGuild(id: string) {
@@ -34,52 +74,9 @@ export default class Database {
       const obj = {
         id: id,
         prefix: '++',
-        blacklisted: false,
-        settings: {
-          logs: {
-            enabled: false,
-            channel: '',
-            type: 'embed',
-          },
-          moderation: {
-            enabled: false,
-            channel: '',
-            type: 'embed',
-            cases: [{}],
-            automod: {
-              raid: {
-                enabled: false,
-                channel: '',
-                period: null,
-                flagged_role: [],
-                flagged_channel: '',
-                flagged_message: '',
-                verify: false,
-              },
-              roles: [],
-              perms: {},
-            },
-            muted: '',
-          },
-          autoRole: {
-            enabled: false,
-            role: [],
-          },
-          selfAssign: {
-            enabled: false,
-            roles: [],
-          },
-          starboard: {
-            enabled: false,
-            channel: '',
-            starsNeeded: 4,
-            reaction: '⭐',
-            type: 'embed',
-          },
-        },
-        setup: false,
-        tags: {},
+        blacklisted: false
       };
+      await this.addSettings(id);
       return await this.guilds.insertOne(obj);
     }
   }
@@ -107,7 +104,7 @@ export default class Database {
     if (!g) {
       const obj = {
         id: `${id}-${guild}`,
-          muted: new Date(),
+          muted: new Date().toISOString(),
           raid: {
             infractions: {},
             participated: false

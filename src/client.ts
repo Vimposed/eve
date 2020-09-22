@@ -29,12 +29,13 @@ import { collection } from 'mongodb';
 
         public async getPrefix(id) {
             let g = await this.db.guilds.findOne({ id: id });
+            if(!g) return prefix;
             return g.prefix;
         }
 
         public commandHandler: CommandHandler = new CommandHandler(this, {
             directory: join(__dirname, './', 'commands'),
-            prefix: (msg: Message) => this.getPrefix(msg.guild!.id) ? this.getPrefix(msg.guild!.id) : prefix,
+            prefix: (msg: Message) => this.getPrefix(msg.guild!.id),
             allowMention: true,
             commandUtil: true,
             commandUtilLifetime: 3e5,
@@ -53,7 +54,7 @@ import { collection } from 'mongodb';
             },
             ignorePermissions: owners
         });
-        
+
         public constructor(config: options) {
             super({
                 ownerID: config.owners
@@ -71,7 +72,9 @@ import { collection } from 'mongodb';
 
             this.commandHandler.loadAll();
             this.listenerHandler.loadAll();
-
+            // TODO: create a new service instance so that I can access
+            // things like this.service.automod
+            // const AutoMod: Automod = new Automod();
             this.db = new Database(mongo);
             await this.db.connect();
         }
@@ -79,6 +82,6 @@ import { collection } from 'mongodb';
         public async start(): Promise<string> {
             await this._init();
             return this.login(this.config.token);
-        } 
+        }
     }
-    
+
