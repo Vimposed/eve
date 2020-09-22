@@ -1,6 +1,6 @@
-# nesquik
+# eve
 
-git clone https://gitlab.com/mop/nesquik.git
+git clone https://github.com/Vimposed/eve/
 
 `npm install`
 
