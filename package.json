@@ -5,7 +5,8 @@
   "main": "build/bot.js",
   "scripts": {
     "dev": "nodemon",
-    "build": "tsc"
+    "build": "tsc",
+    "prod": "node ./build/bot.js"
   },
   "author": "Imposed",
   "license": "MIT",
