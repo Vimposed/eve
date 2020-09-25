@@ -10,11 +10,13 @@
   "author": "Imposed",
   "license": "MIT",
   "dependencies": {
+    "dayjs": "^1.8.36",
     "discord-akairo": "github:1Computer1/discord-akairo",
     "discord.js": "github:discordjs/discord.js",
     "mongodb": "^3.5.6",
     "pg": "^8.0.3",
-    "sqlite3": "^4.1.1"
+    "sqlite3": "^4.1.1",
+    "tmp": "^0.2.1"
   },
   "devDependencies": {
     "@types/node": "^13.13.2",
