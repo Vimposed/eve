@@ -31,10 +31,15 @@ export default class MessageEvent extends Listener {
         }
     }
 
-    public async exec(msg: Message): Promise<void> {
-        AutoMod.enableRaidMode(msg);
+    public async exec(msg: Message): Promise<void | Message> {
         await this.insertGuilds(msg);
+        const settings = await this.client.db.settings.findOne({ id: msg.guild!.id });
+        /*
+        if(this.client.service.automod.enabled) {
 
+        }
+        */
+        // if(settings.guild.ignoredChannels.includes(msg.channel.id)) return;
     }
 }
 

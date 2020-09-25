@@ -53,7 +53,10 @@ export default class Database {
           dupeStrikes: 0,
           mentionStrikes: 0,
           maxMentions: 4,
-          resolveLinks: false
+          resolveLinks: false,
+          flagMessage: '`[{time}]` <:eFail:758310391809572877> {member.tag} was flagged. Their account is no older than a week.',
+          badWords: [],
+          badWordsEnabled: false
         },
         guild: {
           autorole: false,
@@ -61,7 +64,8 @@ export default class Database {
           joinLogActive: false,
           joinChannel: '',
           joinMessage: '',
-          joinLogType: 'message'
+          joinLogType: 'message',
+          ignoredChannels: []
         }
       }
       return this.settings.insertOne(obj);
