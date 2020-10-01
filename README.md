@@ -1,6 +1,6 @@
 # Eve
 
-**Eve** is a semi-private server management bot for [Discord](https://discord.com). It features a suite of advanced tools to help streamline the server administration, moderation, and auto-moderation processes. In addition to this, they are also intended to be extremely intuitive, customizable, and fast.
+**Eve** is a semi-private server management bot for [Discord](https://discord.com). It features a suite of advanced tools to help streamline the server administration, moderation, and auto-moderation processes. In addition to this, Eve is also intended to be extremely intuitive, customizable, and fast.
 
 The bot is semi-private in order to reduce load and keep it running smoothly. Our ultimate goal with Eve is to make a functional bot that delivers excellent tools and performance in one package.
 
