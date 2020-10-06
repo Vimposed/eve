@@ -11,6 +11,7 @@ raid: {
   newAccount: boolean
 },
 automod: {
+  infractions: any,
   copypastaStrikes: number,
   dehoist: boolean,
   dupeDeleteThresh: number,
@@ -29,7 +30,47 @@ guild: {
   joinLogActive: string,
   joinChannel: string,
   joinLogType: string,
+  automodChannel: string,
   ignoredChannels: string[]
   }
+}
+
+export type GuildType = {
+  _id: string,
+  id: string,
+  prefix: string,
+  blacklisted: boolean
+}
+
+export type GuildUser = {
+  _id: string,
+  id: string,
+  muted: string,
+  automod: {
+    infractions: [{}],
+  },
+  raid: {
+    participated: boolean
+  }
+}
+
+export type BotUser = {
+ _id: string,
+ id: string,
+ permissions: string[],
+ automod: {
+  infractions: [{}],
+ },
+ raid: {
+  participated: boolean
+ }
+}
+
+export type Punishment = {
+  case: number,
+  moderator: string,
+  member: string,
+  reason?: string,
+  time?: string
 }
 
