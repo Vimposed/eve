@@ -56,7 +56,8 @@ export default class Database {
           resolveLinks: false,
           flagMessage: '`[{time}]` <:eFail:758310391809572877> {member.tag} was flagged. Their account is no older than a week.',
           badWords: [],
-          badWordsEnabled: false
+          badWordsEnabled: false,
+          infractions: [{}],
         },
         guild: {
           autorole: false,
@@ -65,6 +66,7 @@ export default class Database {
           joinChannel: '',
           joinMessage: '',
           joinLogType: 'message',
+          automodChannel: '',
           ignoredChannels: []
         }
       }
@@ -109,8 +111,10 @@ export default class Database {
       const obj = {
         id: `${id}-${guild}`,
           muted: new Date().toISOString(),
+          automod: {
+            infractions: [{}],
+          },
           raid: {
-            infractions: {},
             participated: false
           }
       };
@@ -127,3 +131,4 @@ export default class Database {
 }
 
 module.exports = Database;
+

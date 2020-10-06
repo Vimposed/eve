@@ -1,0 +1,13 @@
+daysUntilLock: 7
+
+skipCreatedBefore: 2020-10-5
+
+exemptLabels: ongoing
+
+lockLabel: resolved
+
+lockComment: >
+  This thread has been automatically locked since there has not been
+  any recent activity after it was closed.
+
+setLockReason: true
