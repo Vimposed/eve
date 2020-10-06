@@ -44,8 +44,7 @@ export default class Automod {
         const settings = await client.db.settings.findOne({ id: msg.guild!.id });
         if(!settings) return;
         const automod = settings.automod.maxMentions;
-        // let maxMentions = msg.mentions.users.filter(m => !m.bot).size + msg.mentions.roles.size;
-        const userMentions = msg.mentions.users.filter(m => !m.bot).size;
+        const userMentions = msg.mentions.users/*.filter(m => !m.bot)*/.size;
         const roleMentions = msg.mentions.roles.size;
         let maxMentions: number;
         if(userMentions) maxMentions = userMentions;
@@ -53,7 +52,7 @@ export default class Automod {
         else maxMentions =  roleMentions;
         if(settings) {
             if(maxMentions >= automod) {
-                // TOOD: create a new punishment with punishment handler
+                // TODO: create a new punishment with punishment handler
             }
         }
     }

@@ -5,12 +5,14 @@ import { prefix, owners, token, mongo } from './config';
 import { join } from 'path';
 import Database from './modules/database';
 import { collection } from 'mongodb';
+import ServiceManager from './automod/serviceManager';
 
     declare module 'discord-akairo' {
         interface AkairoClient {
             commandHandler: CommandHandler;
             listenerHandler: ListenerHandler;
             db: Database;
+            serviceHandler: ServiceManager;
         }
     }
 
@@ -21,6 +23,7 @@ import { collection } from 'mongodb';
 
     export default class Client extends AkairoClient {
         public db!: Database;
+        public serviceHandler!: ServiceManager;
         public data: collection;
         public config: options;
         public listenerHandler: ListenerHandler = new ListenerHandler(this, {
@@ -72,9 +75,7 @@ import { collection } from 'mongodb';
 
             this.commandHandler.loadAll();
             this.listenerHandler.loadAll();
-            // TODO: create a new service instance so that I can access
-            // things like this.service.automod
-            // const AutoMod: Automod = new Automod();
+            this.serviceHandler = new ServiceManager();
             this.db = new Database(mongo);
             await this.db.connect();
         }
