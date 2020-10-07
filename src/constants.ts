@@ -1,49 +1,36 @@
-const obj = {
-  id: '',
-  prefix: '++',
-  blacklisted: false,
-  settings: {
-    logs: {
-      enabled: false,
-      channel: '',
-      type: 'embed',
+export const GuildSettings = {
+  id: '{id}',
+  raid: {
+    enabled: false,
+    channel: '',
+    period: '',
+    flaggedRole: '',
+    flaggedChannel: '',
+    verify: false,
+    newAccount: false
     },
-    moderation: {
-      enabled: false,
-      channel: '',
-      type: 'embed',
-      cases: [{}],
-      automod: {
-        raid: {
-          enabled: false,
-          channel: '',
-          period: null,
-          flagged_role: [],
-          flagged_channel: '',
-          flagged_message: '',
-          verify: false,
-        },
-        roles: [],
-        perms: {},
-      },
-      muted: '',
+    automod: {
+    copypastaStrikes: 0,
+    dehoist: false,
+    dupeDeleteThresh: 0,
+    dupeStrikeThresh: 0,
+    dupeStrikes: 0,
+    mentionStrikes: 0,
+    maxMentions: 4,
+    resolveLinks: false,
+    flagMessage: '`[{time}]` <:eFail:758310391809572877> {member.tag} was flagged. Their account is no older than a week.',
+    badWords: [],
+    badWordsEnabled: false,
+    infractions: [{}],
     },
-    autoRole: {
-      enabled: false,
-      role: [],
-    },
-    selfAssign: {
-      enabled: false,
-      roles: [],
-    },
-    starboard: {
-      enabled: false,
-      channel: '',
-      starsNeeded: 4,
-      reaction: '⭐',
-      type: 'embed',
-    },
-  },
-  setup: false,
-  tags: {},
-};
+    guild: {
+    autorole: false,
+    autoroles: [],
+    joinLogActive: false,
+    joinChannel: '',
+    joinMessage: '',
+    joinLogType: 'message',
+    automodChannel: '',
+    ignoredChannels: []
+  }
+}

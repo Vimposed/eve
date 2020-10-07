@@ -18,18 +18,23 @@ export default class PermissionListener extends Listener {
 
         switch(type) {
             case 'client':
-                return msg.util?.send(`<:eFail:758310391809572877> I am unable to proceed with this command because I am missing ${this.reqPermissions(msg.member, permissions as [])}`);
+                return msg.util?.send(`<:ePerms:763229398416490496> I am unable to proceed with this command because I am missing ${this.reqPermissions(msg.member, permissions as [])}`);
             case 'user':
                 return msg.util?.send(`<:eFail:758310391809572877> I am unable to proceed with this command because I am missing ${this.reqPermissions(msg.member, permissions as [])}`);
              }
         }
 
         private reqPermissions(user: GuildMember, permissions:[]) {
-            const result = user.permissions.missing(permissions)/*.map(str =>
+            /*const result = user.permissions.missing(permissions).map(str =>
             `\`${str.replace(/_/g, '')
                 .toLowerCase()
                 .replace(/\b(\w)/g, char => char.toUpperCase())}\``);
                 */
-        return result.length > 1 ? `${result.slice(0, -1).join(' ')} and ${result.slice(-1)[0]}` : result[0];
+            const result = user.permissions.missing(permissions).map(str =>
+            `${str.replace(/_/g, ' ')
+                .toLowerCase()
+                .replace(/\b(\w)/g, char => char.toLowerCase())}`);
+                console.log(result);
+        return result.length > 1 ? `${result.slice(0, -1).join(', ')} and ${result.slice(-1)[0]}` : result[0];
     }
 }
