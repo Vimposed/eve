@@ -12,7 +12,7 @@ import ServiceManager from './automod/serviceManager';
             commandHandler: CommandHandler;
             listenerHandler: ListenerHandler;
             db: Database;
-            serviceHandler: ServiceManager;
+            serviceManager: ServiceManager;
         }
     }
 
@@ -23,7 +23,7 @@ import ServiceManager from './automod/serviceManager';
 
     export default class Client extends AkairoClient {
         public db!: Database;
-        public serviceHandler!: ServiceManager;
+        public serviceManager!: ServiceManager;
         public data: collection;
         public config: options;
         public listenerHandler: ListenerHandler = new ListenerHandler(this, {
@@ -75,7 +75,7 @@ import ServiceManager from './automod/serviceManager';
 
             this.commandHandler.loadAll();
             this.listenerHandler.loadAll();
-            this.serviceHandler = new ServiceManager();
+            this.serviceManager = new ServiceManager();
             this.db = new Database(mongo);
             await this.db.connect();
         }

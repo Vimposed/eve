@@ -17,7 +17,7 @@ export default class Event extends Listener {
         const channels = this.client.channels.cache.get(channel) as TextChannel;
 
         if(settings.raid.enabled === true) {
-             if(settings.raid.newAccount === true) await this.client.serviceHandler.getAutomod().raidAccountCheck(msg);
+             if(settings.raid.newAccount === true) await this.client.serviceManager.getAutomod().raidAccountCheck(msg);
         }
 
         if(guild.autorole === true) {
