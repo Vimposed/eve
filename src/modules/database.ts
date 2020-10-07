@@ -8,6 +8,7 @@ export default class Database {
   public users: collection;
   public guildusers: collection;
   public settings: collection;
+  public cases: collection;
   constructor(url: string) {
     this.url = url;
     this.client = new MongoClient(this.url, {
@@ -28,6 +29,7 @@ export default class Database {
     this.users = this.client.db('eve').collection('users');
     this.guildusers = this.client.db('eve').collection('guildusers');
     this.settings = this.client.db('eve').collection('settings');
+    this.cases = this.client.db('eve').collection('cases');
     return console.log(`Connected to MongoDB`);
   }
 
@@ -40,8 +42,8 @@ export default class Database {
           enabled: false,
           channel: '',
           period: '',
-          flagged_role: '',
-          flagged_channel: '',
+          flaggedRole: '',
+          flaggedChannel: '',
           verify: false,
           newAccount: false
         },
@@ -57,7 +59,6 @@ export default class Database {
           flagMessage: '`[{time}]` <:eFail:758310391809572877> {member.tag} was flagged. Their account is no older than a week.',
           badWords: [],
           badWordsEnabled: false,
-          infractions: [{}],
         },
         guild: {
           autorole: false,

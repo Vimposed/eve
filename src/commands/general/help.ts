@@ -21,11 +21,14 @@ export default class HelpCommand extends Command {
     }
 
     public async exec(msg: Message, args) {
-        let commands = this.client.commandHandler.modules.map(c => c.aliases[0])
+        /*let commands = this.client.commandHandler.modules.map(c => c.aliases[0])
         if(!args.content || args.content === null) return msg.channel.send(this.client.commandHandler.modules.map(c => c.aliases[0]));
 
         if(args.content === commands[0]) {
             return msg.channel.send(this.client.commandHandler.modules.map(c => c.description.content));
         }
+        */
+       const commands = this.client.commandHandler.modules.filter(c => !c.ownerOnly).map(c => c.aliases[0]);
+       if(!args.content || args.content === null) return commands;
     }
 }

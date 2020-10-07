@@ -3,9 +3,9 @@ import { Message, GuildMember, Guild, User, TextChannel } from 'discord.js';
 
 export default class Event extends Listener {
     public constructor() {
-        super('guildMemberAdd', {
+        super('guildMemberRemove', {
             emitter: 'client',
-            event: 'guildMemberAdd',
+            event: 'guildMemberRemove',
             category: 'client'
         });
     }
@@ -13,16 +13,8 @@ export default class Event extends Listener {
     public async exec(msg: GuildMember, server: Guild, user: User) {
         const settings = await this.client.db.settings.findOne({ id: msg.guild.id });
         const guild = settings.guild;
-        const channel = guild.joinChannel;
+        const channel = guild.leaveChannel;
         const channels = this.client.channels.cache.get(channel) as TextChannel;
-
-        if(settings.raid.enabled === true) {
-             if(settings.raid.newAccount === true) await this.client.serviceHandler.getAutomod().raidAccountCheck(msg);
-        }
-
-        if(guild.autorole === true) {
-            return msg.roles.add(settings.guild.autoroles);
-        }
 
         if(guild.joinLogActive === true) {
             switch(guild.joinLogType) {
@@ -33,7 +25,7 @@ export default class Event extends Listener {
                     }
                     if(channel) return channels.send({ embed });
                 case 'message':
-                    let message = guild.joinMessage.replace(/{member}/g, msg.user)
+                    let message = guild.leaveMessage.replace(/{member}/g, msg.user)
                     .replace(/{member.name}/g, msg.user.username)
                     .replace(/{member.tag}/g, msg.user.tag)
                     .replace(/{guild}/g, server)

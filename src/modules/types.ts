@@ -5,8 +5,8 @@ raid: {
   enabled: boolean,
   channel: string,
   period: string,
-  flagged_role: string,
-  flagged_channel: string,
+  flaggedRole: string,
+  flaggedChannel: string,
   verify: boolean,
   newAccount: boolean
 },
@@ -33,6 +33,21 @@ guild: {
   automodChannel: string,
   ignoredChannels: string[]
   }
+}
+
+export interface GuildAutomod {
+  infractions: any;
+  copypastaStrikes: number;
+  dehoist: boolean;
+  dupeDeleteThresh: number;
+  dupeStrikes: number;
+  dupeStrikeThresh: number;
+  mentionStrikes: number;
+  maxMentions: number;
+  resolveLinks: boolean;
+  flagMessage: string;
+  badWords: string[];
+  badWordsEnabled: boolean;
 }
 
 export type GuildType = {

@@ -13,6 +13,8 @@ export default class PingCommand extends Command {
                 content: 'Check the latency of the bot from the Discord API',
                 usage: 'ping'
             },
+            clientPermissions: ['BAN_MEMBERS', 'KICK_MEMBERS', 'SPEAK', 'MANAGE_GUILD', 'MANAGE_ROLES', 'EMBED_LINKS'],
+            userPermissions: ['BAN_MEMBERS', 'KICK_MEMBERS'],
             ratelimit: 3
         })
     }
