@@ -34,7 +34,9 @@ export default class MessageEvent extends Listener {
     public async exec(msg: Message): Promise<void | Message> {
         await this.insertGuilds(msg);
         const settings = await this.client.db.settings.findOne({ id: msg.guild!.id });
-        this.client.serviceManager.getAutomod().mentionThreshold(msg);
+        const automod = this.client.serviceManager.getAutomod();
+        // @ts-ignore
+        if(automod.getSettings(msg).guild.automod === true) automod.mentionThreshold(msg);
         /*
         if(this.client.service.automod.enabled) {
 
