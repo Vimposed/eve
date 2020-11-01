@@ -25,11 +25,11 @@ export default class Database {
     }
 
     await this.client.connect();
-    this.guilds = this.client.db('eve').collection('guilds');
-    this.users = this.client.db('eve').collection('users');
-    this.guildusers = this.client.db('eve').collection('guildusers');
-    this.settings = this.client.db('eve').collection('settings');
-    this.cases = this.client.db('eve').collection('cases');
+    this.guilds = this.client.db('neko').collection('guilds');
+    this.users = this.client.db('neko').collection('users');
+    this.guildusers = this.client.db('neko').collection('guildusers');
+    this.settings = this.client.db('neko').collection('settings');
+    this.cases = this.client.db('neko').collection('cases');
     return console.log(`Connected to MongoDB`);
   }
 
@@ -58,6 +58,7 @@ export default class Database {
           resolveLinks: false,
           flagMessage: '`[{time}]` <:eFail:758310391809572877> {member.tag} was flagged. Their account is no older than a week.',
           badWords: [],
+          infractions: [{}],
           badWordsEnabled: false,
         },
         guild: {
@@ -80,7 +81,7 @@ export default class Database {
     if (!guild) {
       const obj = {
         id: id,
-        prefix: '++',
+        prefix: '>',
         blacklisted: false
       };
       await this.addSettings(id);

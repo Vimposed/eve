@@ -1,3 +1,5 @@
+import { User, Message, GuildMember, TextChannel, MessageEmbed } from 'discord.js';
+
 export type GuildSettings = {
 _id: string,
 id: string,
@@ -81,11 +83,13 @@ export type BotUser = {
  }
 }
 
+export type PunishmentType = 'kick' | 'ban' | 'mute' | 'unmute' | 'unban' | 'warn';
 export type Punishment = {
   case: number,
-  moderator: string,
-  member: string,
+  moderator: User,
+  member: GuildMember,
+  message: Message,
   reason?: string,
   time?: string
+  type: PunishmentType
 }
-

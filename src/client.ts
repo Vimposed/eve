@@ -31,7 +31,7 @@ import ServiceManager from './automod/serviceManager';
         });
 
         public async getPrefix(id) {
-            let g = await this.db.guilds.findOne({ id: id });
+            const g = await this.db.guilds.findOne({ id: id });
             if(!g) return prefix;
             return g.prefix;
         }
@@ -41,8 +41,8 @@ import ServiceManager from './automod/serviceManager';
             prefix: (msg: Message) => this.getPrefix(msg.guild!.id),
             allowMention: true,
             commandUtil: true,
-            commandUtilLifetime: 3e5,
-            defaultCooldown: 6e4,
+            commandUtilLifetime: 300000,
+            defaultCooldown: 15000,
             handleEdits: true,
             argumentDefaults: {
                 prompt: {
@@ -51,7 +51,7 @@ import ServiceManager from './automod/serviceManager';
                     timeout: 'The command has been canceled due to command timeout',
                     ended: 'You have exceeded the maximum amount of retries, command has now been canceled',
                     retries: 3,
-                    time: 3e4
+                    time: 30000
                 },
                 otherwise: ''
             },
@@ -62,6 +62,7 @@ import ServiceManager from './automod/serviceManager';
             super({
                 ownerID: config.owners
             });
+            this.options.fetchAllMembers = true,
             this.config = config;
         }
 

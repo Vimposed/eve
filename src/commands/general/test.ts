@@ -1,7 +1,8 @@
 import { Command } from 'discord-akairo';
-import { Message } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 import dayjs from 'dayjs';
 import Utils from '../../modules/utils';
+import Embed from '../../modules/embed';
 const utils: Utils = new Utils();
 
 export default class PingCommand extends Command {
@@ -10,8 +11,8 @@ export default class PingCommand extends Command {
             aliases: ['test'],
             category: 'general',
             description: {
-                content: 'Check the latency of the bot from the Discord API',
-                usage: 'ping'
+                content: 'This is what I use to test all of my WIP commands.',
+                usage: 'test!!'
             },
             clientPermissions: ['BAN_MEMBERS', 'KICK_MEMBERS', 'SPEAK', 'MANAGE_GUILD', 'MANAGE_ROLES', 'EMBED_LINKS'],
             userPermissions: ['BAN_MEMBERS', 'KICK_MEMBERS'],
@@ -19,15 +20,12 @@ export default class PingCommand extends Command {
         })
     }
 
-    private formatMessage(msg: string, other: string): string {
-        return '\`' + msg + '\`' + ' ' + other;
-    }
-
     public async exec(msg: Message) {
-        // return msg.util!.send(this.formatMessage('[' + dayjs().format('HH:mm:ss') + ']', 'Automod beep boop'));
         // utils.exportConfig(msg);
-        if(msg.attachments.first()) {
-            utils.importConfig(msg);
-        }
+        // if(msg.attachments.first()) {
+        //     utils.importConfig(msg);
+        // }
+        const embed = new Embed('hello', 'hey').setAuthor('sir', 'https://file.impd.cc/b9fc79.png');
+        this.client.serviceManager.getWebhook().send(msg.guild, embed);
     }
 }

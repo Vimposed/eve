@@ -11,7 +11,7 @@ export default class createEvent extends Listener {
 
     public exec(): void {
         console.log('Updated user activity');
-        this.client.user!.setActivity(`++help | ${this.client.guilds.cache.size} serv${this.client.guilds.cache.size > 1 ? 'ers' : 'er'}`)
+        this.client.user!.setActivity(`>help | ${this.client.guilds.cache.size} serv${this.client.guilds.cache.size > 1 ? 'ers' : 'er'}`)
 
         // connect to the ws server when connecting to discord.
     }

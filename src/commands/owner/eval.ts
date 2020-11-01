@@ -18,7 +18,7 @@ export default class PingCommand extends Command {
             category: 'owner',
             description: {
                 content: 'Evaluate code :3',
-                usage: '++eval <shit>'
+                usage: '>eval <shit>'
             },
             ownerOnly: true
         })

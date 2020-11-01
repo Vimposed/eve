@@ -3,6 +3,7 @@ import AkarioClient from '../client';
 import client from '../bot';
 import fs from 'fs';
 import { GuildSettings } from './types';
+import { prefix } from '../config';
 
 export default class Utils {
     public client: AkarioClient;
@@ -24,5 +25,11 @@ export default class Utils {
       const conf = msg.attachments.first();
       const file = fs.readFileSync(Buffer.from(conf));
       console.log(file)
+    }
+
+    public async getPrefix(id) {
+      const g = await client.db.guilds.findOne({ id: id });
+      if(!g) return prefix;
+      return g.prefix;
     }
 }

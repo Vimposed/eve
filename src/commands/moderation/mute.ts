@@ -1,5 +1,6 @@
 import { Command } from 'discord-akairo';
-import { Message, GuildMember } from 'discord.js';
+import { Message, GuildMember, TextChannel } from 'discord.js';
+import { Punishment, GuildSettings } from '../../modules/types'
 
 export default class BanCommand extends Command {
     public constructor() {
@@ -14,17 +15,23 @@ export default class BanCommand extends Command {
                 {
                     id: 'user',
                     type: 'member',
-                    match: 'rest'
-                }
+                    // match: 'rest'
+                },
+                {
+                    id: "reason",
+                    match: "rest",
+                    type: "string",
+                },
             ],
-            clientPermissions: ['KICK_MEMBERS'],
-            userPermissions: ['KICK_MEMBERS'],
+            clientPermissions: ["MANAGE_ROLES"],
+            userPermissions: ["MANAGE_MESSAGES"],
             ratelimit: 2
         })
     }
 
-    public async exec(msg: Message, { user }: { user: GuildMember }) {
+    public async exec(msg: Message, { user, reason }: { user: GuildMember, reason?: string }) {
+        const settings: GuildSettings = await this.client.db.settings.findOne({ id: msg.guild.id });
         if(!user) return msg.channel.send('Invalid arguments were provided: Please specify a user.');
-        if(user) return msg.util?.send(`${user}`);
+        return this.client.serviceManager.getPunishment().punishment(msg.author, user, msg, 'mute', reason);
     }
 }

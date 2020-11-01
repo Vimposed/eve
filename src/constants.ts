@@ -1,36 +1,8 @@
-export const GuildSettings = {
-  id: '{id}',
-  raid: {
-    enabled: false,
-    channel: '',
-    period: '',
-    flaggedRole: '',
-    flaggedChannel: '',
-    verify: false,
-    newAccount: false
-    },
-    automod: {
-    copypastaStrikes: 0,
-    dehoist: false,
-    dupeDeleteThresh: 0,
-    dupeStrikeThresh: 0,
-    dupeStrikes: 0,
-    mentionStrikes: 0,
-    maxMentions: 4,
-    resolveLinks: false,
-    flagMessage: '`[{time}]` <:eFail:758310391809572877> {member.tag} was flagged. Their account is no older than a week.',
-    badWords: [],
-    badWordsEnabled: false,
-    infractions: [{}],
-    },
-    guild: {
-    autorole: false,
-    autoroles: [],
-    joinLogActive: false,
-    joinChannel: '',
-    joinMessage: '',
-    joinLogType: 'message',
-    automodChannel: '',
-    ignoredChannels: []
-  }
+import { GuildMember } from "discord.js";
+
+export const responses = {
+  INVALID_USER: 'Unable to find the specified user.',
+  ACTION_SELF: (action: string) => `Sorry, but you're unable to ${action} yourself.`,
+  ACTION_USER: (action: string) => `I am unable to ${action} that user. Please check that I have the correct permissions, or my role is higher than that user!`,
+  INVALID_ACTION: (action: string) => `You don't have permissions to ${action} that user.`
 }

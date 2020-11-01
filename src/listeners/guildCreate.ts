@@ -29,6 +29,6 @@ If you are looking for a bot that is designed for your server, I recommend you l
     public exec(guild: Guild): void {
         this.goodByeShittyServers(guild);
         console.log('Updated user activity');
-        this.client.user?.setActivity(`++help | ${this.client.guilds.cache.size} serv${this.client.guilds.cache.size > 1 ? 'ers' : 'er'}`)
+        this.client.user?.setActivity(`>help | ${this.client.guilds.cache.size} serv${this.client.guilds.cache.size > 1 ? 'ers' : 'er'}`)
     }
 }
