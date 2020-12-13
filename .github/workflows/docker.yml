@@ -1,0 +1,22 @@
+name: eve
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }} 
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }} 
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: docker build
+      run: |
+        docker build . -t eve:latest
+    - name: docker push
+        docker push eve:latest
